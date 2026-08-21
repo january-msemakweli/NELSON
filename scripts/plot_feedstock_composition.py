@@ -220,7 +220,7 @@ def draw_hbar(ax, labels, values, xlabel: str, title: str, tag: str | None) -> N
             color=LABEL_COLOR,
         )
     if tag:
-        add_panel_tag(ax, tag, x=-0.34, y=1.03)
+        add_panel_tag(ax, tag, x=-0.02, y=1.08)
 
 
 def save_figure(fig, stem: Path) -> None:
