@@ -1,0 +1,97 @@
+﻿column,type,definition
+record_id,Integer,Row number in the analysis set after sorting by extraction_id.
+timestamp,Datetime,"Form submission time, ISO-like YYYY-MM-DD HH:MM:SS."
+study_id,Integer,Study identifier from the extraction form.
+extraction_id,Text,Study-treatment identifier (study_id-arm). One row is one extraction.
+citation,Text,"Harmonized short citation: First author et al. YEAR, or Author1 & Author2 YEAR."
+first_author,Text,"First-author surname, for grouping."
+year,Integer,Publication year.
+doi,Text,DOI with prefix and whitespace removed. NR if missing.
+country,Text,Country of the experiment. Multi-country values are semicolon-separated.
+n_countries,Integer,Number of countries listed.
+feedstock_category,Category,"Harmonized feedstock class: Straw, Husk, Shell, Crop residue, Peel, Pulp, Seed residue, Fruit processing waste, Vegetable processing waste, Agricultural residue, Mixed."
+specific_feedstock,Category,"Harmonized feedstock name (e.g., Rice hull -> Rice husk; corn straw -> Maize straw; Açaí seed -> Acai seed)."
+feedstock_single_or_mixed,Category,Single or Mixed.
+feedstock_composition,Text,Cleaned composition string. Co-applied non-feedstock materials are also in co_amendment.
+co_amendment,Text,Co-applied amendment. None if biochar was used alone.
+co_amendment_present,Yes/No,Yes if any co-amendment was used.
+co_amendment_class,Category,"None, Organic, Microbial, Phosphate mineral, Mineral, Fertilizer, Chemical, Metal/chemical."
+carbonization_method,Category,"Slow pyrolysis, Fast pyrolysis, Co-pyrolysis, Slash-and-char, or NR."
+carbonization_atmosphere,Category,"N2, Oxygen-limited, or NR if not stated."
+biochar_modification,Text,Cleaned modification description. None if unmodified.
+modification_present,Yes/No,Yes if the biochar was modified after or during production.
+modification_class,Category,"None, Phosphate-enriched, Fe modified, Fe-Mn modified, Fe-Mg modified, FeCl3 modified, nZVI, N-doped, Particle-size reduced (nano), Microbially loaded, Physical composite."
+pyrolysis_temp_c,Number,Pyrolysis temperature in C. Midpoint if a range was reported.
+pyrolysis_temp_min_c,Number,Lower bound of reported temperature range.
+pyrolysis_temp_max_c,Number,Upper bound of reported temperature range.
+pyrolysis_temp_reported,Text,Original cleaned temperature string.
+residence_time_min,Number,Residence time in minutes.
+residence_time_reported,Text,Original cleaned residence time.
+particle_size,Text,"Harmonized particle-size label, with mesh converted to mm where possible."
+particle_size_max_mm,Number,Numeric particle size in mm (mesh converted; upper bound if <x mm).
+particle_size_class,Category,"Sieved, Mesh, Nano, Micro, Milli, NR, Other."
+biochar_ph,Number,Biochar pH. Midpoint if a range was reported.
+biochar_ph_sd,Number,"Reported SD of biochar pH, if given."
+biochar_ph_reported,Text,Cleaned reported biochar pH.
+surface_area_m2_g,Number,BET or reported surface area in m2/g.
+surface_area_sd,Number,Reported SD of surface area.
+surface_area_reported,Text,Cleaned reported surface area. Supplementary-only mentions coded NR.
+ash_content_pct,Number,Ash content in percent.
+ash_content_sd,Number,Reported SD of ash content.
+ash_content_reported,Text,Cleaned reported ash content.
+functional_groups,Text,Cleaned FTIR/XPS description. NR if not reported.
+functional_groups_std,Text,"Semicolon-separated controlled terms (OH, COOH, C=O, C=C, C-O, C-H, CO3, Si-O, Fe-O, Mn-O, PO4, N-H, C-N, pi-pi)."
+cec_cmolc_kg,Number,CEC converted to cmolc/kg (mmol/kg divided by 10; meq/100 g treated as equivalent).
+cec_sd,Number,"Reported SD of CEC, on the cmolc/kg scale."
+cec_reported,Text,Cleaned reported CEC.
+cec_reported_for,Category,"biochar, soil, or NR. Use to avoid mixing soil CEC with biochar CEC."
+experiment_type,Category,"Pot, Field, Growth chamber, or Lysimeter."
+soil_type,Text,Cleaned original soil description.
+soil_type_class,Category,"Agricultural, Mine-affected, Industrial, Wastewater-irrigated, Paddy, Experimental/other."
+contamination_source,Category,"Naturally contaminated, Artificially spiked, or Both."
+target_metals,Text,Semicolon-separated metal symbols in a fixed PTE order.
+n_metals,Integer,Number of target metals/metalloids.
+initial_metal_concentration,Text,Cleaned initial soil metal concentrations. Units left as reported after ASCII normalization (mg/kg).
+soil_ph,Number,Initial soil pH.
+soil_ph_sd,Number,Reported SD of soil pH.
+soil_ph_reported,Text,Cleaned reported soil pH.
+biochar_application_rate,Text,Cleaned original application-rate string.
+application_rate_pct_ww,Number,Application rate as % w/w when extractable. g/kg converted as value/10.
+application_rate_t_ha,Number,Application rate in t/ha when reported (including Mg/ha).
+soil_incubation,Text,Cleaned original incubation description.
+soil_incubation_days,Number,"Incubation/equilibration time in days. None/immediate coded 0. Weeks x7, months x30, years x365."
+plant_growth_period,Text,Cleaned original plant-growth duration.
+plant_growth_days,Number,Plant growth period in days.
+experimental_duration,Text,Cleaned original total duration.
+experimental_duration_days,Number,Total experimental duration in days.
+leafy_vegetable_species,Text,Harmonized Common name (Scientific name); semicolon-separated if multiple.
+species_common,Text,Harmonized common names only.
+species_scientific,Text,Harmonized scientific names only.
+n_species,Integer,Number of vegetable species in the extraction.
+edible_part,Category,"Shoot (leaves), Fruit/pods, or Mixed edible tissues."
+soil_bioavailability_method,Text,Cleaned original bioavailability method.
+bioavailability_method_std,Text,"Semicolon-separated controlled methods (DTPA, CaCl2, TCLP, BCR, Tessier, EDTA, etc.)."
+change_in_soil_bioavailability,Text,Cleaned soil-bioavailability change. NR or Reported graphically if no usable number.
+plant_metal_conc_control,Text,Cleaned control plant metal concentration.
+plant_metal_conc_treated,Text,Cleaned treated plant metal concentration.
+change_in_plant_metal_uptake,Text,Cleaned plant-uptake change.
+bcf,Text,"Bioconcentration factor, cleaned. NR if not reported."
+baf,Text,"Bioaccumulation factor, cleaned."
+tf,Text,"Translocation factor, cleaned."
+hq,Text,"Hazard quotient, cleaned."
+hi,Text,"Hazard index, cleaned."
+cr,Text,"Carcinogenic risk, cleaned."
+bcf_reported,Category,"Yes, No, or Graphical only."
+baf_reported,Category,"Yes, No, or Graphical only."
+tf_reported,Category,"Yes, No, or Graphical only."
+health_risk_reported,Yes/No,"Yes if HQ, HI, or CR was reported numerically or qualitatively."
+immobilization_mechanism,Text,Cleaned original mechanism text.
+mechanism_std,Text,Semicolon-separated controlled mechanisms for counting/plotting.
+main_findings,Text,Cleaned main-findings sentence.
+randomization_reported,Yes/No,Risk-of-bias item.
+replication_reported,Yes/No,Risk-of-bias item.
+control_treatment_present,Yes/No,Risk-of-bias item.
+biochar_characterization_adequate,Yes/No/NR,Risk-of-bias item.
+statistical_analysis_reported,Yes/No,Risk-of-bias item.
+overall_risk_of_bias,Category,"Very low, Low, Moderate, or High."
+reviewer_initials,Category,"Nelson, Oscar, or Emmy."
