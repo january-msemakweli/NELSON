@@ -232,34 +232,28 @@ def save_figure(fig, stem: Path) -> None:
 
 
 def plot_combined(cat: pd.DataFrame, spec: pd.DataFrame) -> None:
-    fig = plt.figure(figsize=(8.4, 13.2))
+    fig = plt.figure(figsize=(8.4, 13.0))
     gs = GridSpec(
         2,
         1,
         height_ratios=[1.15, 3.55],
-        hspace=0.16,
+        hspace=0.22,
         left=0.32,
         right=0.97,
-        top=0.945,
+        top=0.955,
         bottom=0.05,
         figure=fig,
     )
-    fig.suptitle(
-        "Types of postharvest agricultural wastes used for biochar production",
-        x=0.32,
-        ha="left",
-        fontsize=12,
-        fontweight="bold",
-        color=LABEL_COLOR,
-    )
     ax_a = fig.add_subplot(gs[0])
     ax_b = fig.add_subplot(gs[1])
+    n_cat = int(cat["n"].sum())
+    n_spec = int(spec["n"].sum())
     draw_hbar(
         ax_a,
         cat["category"].astype(str),
         cat["n"],
         "Number of unique study-category combinations",
-        "Feedstock categories",
+        f"Feedstock categories  (n = {n_cat} combinations)",
         "A",
     )
     draw_hbar(
@@ -267,7 +261,7 @@ def plot_combined(cat: pd.DataFrame, spec: pd.DataFrame) -> None:
         spec["specific"].astype(str),
         spec["n"],
         "Number of unique study-feedstock combinations",
-        "Specific feedstocks",
+        f"Specific feedstocks  (n = {n_spec} combinations)",
         "B",
     )
     save_figure(fig, OUT_COMBINED)
@@ -276,12 +270,13 @@ def plot_combined(cat: pd.DataFrame, spec: pd.DataFrame) -> None:
 def plot_panel_a(cat: pd.DataFrame) -> None:
     fig, ax = plt.subplots(figsize=(8.0, 3.8))
     fig.subplots_adjust(left=0.32, right=0.97, top=0.86, bottom=0.16)
+    n_cat = int(cat["n"].sum())
     draw_hbar(
         ax,
         cat["category"].astype(str),
         cat["n"],
         "Number of unique study-category combinations",
-        "Feedstock categories",
+        f"Feedstock categories  (n = {n_cat} combinations)",
         None,
     )
     save_figure(fig, OUT_A)
@@ -290,12 +285,13 @@ def plot_panel_a(cat: pd.DataFrame) -> None:
 def plot_panel_b(spec: pd.DataFrame) -> None:
     fig, ax = plt.subplots(figsize=(8.2, 9.4))
     fig.subplots_adjust(left=0.36, right=0.97, top=0.94, bottom=0.07)
+    n_spec = int(spec["n"].sum())
     draw_hbar(
         ax,
         spec["specific"].astype(str),
         spec["n"],
         "Number of unique study-feedstock combinations",
-        "Specific feedstocks",
+        f"Specific feedstocks  (n = {n_spec} combinations)",
         None,
     )
     save_figure(fig, OUT_B)
