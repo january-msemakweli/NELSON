@@ -77,6 +77,8 @@ Contamination sources are mutually exclusive at the study level. Naturally conta
 
 ## Requirements
 
+Python 3, then:
+
 ```bash
 pip install -r requirements.txt
 ```
