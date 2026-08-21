@@ -37,6 +37,7 @@ NELSON/
     plot_target_ptes.py
     plot_leafy_vegetables.py
     plot_feedstock_composition.py
+    plot_biochar_production.py
   figures/
 ```
 
@@ -65,6 +66,7 @@ python scripts/plot_contamination_sources.py
 python scripts/plot_target_ptes.py
 python scripts/plot_leafy_vegetables.py
 python scripts/plot_feedstock_composition.py
+python scripts/plot_biochar_production.py
 ```
 
 | Script | Output | What it shows |
@@ -77,6 +79,7 @@ python scripts/plot_feedstock_composition.py
 | `plot_target_ptes.py` | `target_ptes` | Unique studies investigating each target PTE |
 | `plot_leafy_vegetables.py` | `leafy_vegetables` | Unique study-species combinations |
 | `plot_feedstock_composition.py` | `feedstock_composition` (A+B), `feedstock_composition_A_categories`, `feedstock_composition_B_specific` | Feedstock categories and specific wastes |
+| `plot_biochar_production.py` | `biochar_production_conditions` (A-D), plus standalone A, B, C, and D files | Pyrolysis temperature, modification, and biochar properties |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -91,6 +94,8 @@ The PTE chart counts a study once for each metal it investigated, so the bars do
 The vegetable chart counts unique study-species combinations, not treatment rows. `Others` includes coriander, rapeseed, cabbage, crown daisy, and remaining crops not in the named list.
 
 The feedstock figure uses unique study-category combinations in Panel A and unique study-specific feedstock combinations in Panel B. Maize stover and maize stalk are combined as corn stalk/stover.
+
+The production-conditions figure is extraction-level (one `extraction_id` per treatment). Panels A and B use the 91 treatments with a numeric pyrolysis temperature. Nine treatments had no usable temperature (seven not reported, two reported only as <500 C). Panel B uses the same hierarchical feedstock groups as the feedstock figure. Panel C assigns one modification class per treatment: the biochar modification is used when present, otherwise the co-amendment (compost, microbial inoculant, or mineral). Panel D compares unmodified and modified/co-amended treatments using group medians for temperature, residence time, pH, surface area, ash, and biochar CEC. Each axis is scaled to the larger of the two group medians.
 
 ## Requirements
 
