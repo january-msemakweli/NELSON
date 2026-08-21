@@ -39,6 +39,7 @@ NELSON/
     plot_feedstock_composition.py
     plot_biochar_production.py
     plot_biochar_properties.py
+    plot_soil_bioavailability.py
   figures/
 ```
 
@@ -69,6 +70,7 @@ python scripts/plot_leafy_vegetables.py
 python scripts/plot_feedstock_composition.py
 python scripts/plot_biochar_production.py
 python scripts/plot_biochar_properties.py
+python scripts/plot_soil_bioavailability.py
 ```
 
 | Script | Output | What it shows |
@@ -83,6 +85,7 @@ python scripts/plot_biochar_properties.py
 | `plot_feedstock_composition.py` | `feedstock_composition` (A+B), `feedstock_composition_A_categories`, `feedstock_composition_B_specific` | Feedstock categories and specific wastes |
 | `plot_biochar_production.py` | `biochar_production_conditions` (A-D), plus standalone A, B, C, and D files | Pyrolysis temperature, modification, and biochar properties |
 | `plot_biochar_properties.py` | `biochar_physicochemical_properties` (A-D), plus standalone A-D files | Biochar pH, surface area, ash, and CEC by feedstock category |
+| `plot_soil_bioavailability.py` | `soil_bioavailability_change` | Cleveland plot of soil-bioavailability % change by feedstock |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -101,6 +104,8 @@ The feedstock figure uses unique study-category combinations in Panel A and uniq
 The production-conditions figure is extraction-level (one `extraction_id` per treatment). Panels A and B use the 91 treatments with a numeric pyrolysis temperature. Nine treatments had no usable temperature (seven not reported, two reported only as <500 C). Panel B uses the same hierarchical feedstock groups as the feedstock figure. Panel C assigns one modification class per treatment: the biochar modification is used when present, otherwise the co-amendment (compost, microbial inoculant, or mineral). Panel D compares unmodified and modified/co-amended treatments using group medians for temperature, residence time, pH, surface area, ash, and biochar CEC. Each axis is scaled to the larger of the two group medians.
 
 The physicochemical figure is also extraction-level. It uses the same hierarchical feedstock groups. CEC is restricted to values reported for the biochar, not the soil. Sample size varies by property because not every treatment reported pH, surface area, ash, or CEC.
+
+The bioavailability Cleveland plot uses extraction x PTE points with a parsed numeric percentage. Positive values are reductions in soil bioavailability. Increases are plotted as negative values. Ranges are entered as the midpoint. When several methods or harvests are reported for the same metal, the preferred available/DTPA/CaCl2/exchangeable value is kept, otherwise the median is used. Treatments without a usable percentage are omitted.
 
 ## Requirements
 
