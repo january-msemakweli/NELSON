@@ -88,3 +88,7 @@ pip install -r requirements.txt
 geopandas is needed only for the map. The first map run downloads Natural Earth country boundaries.
 
 Arial is used for figure text (available on Windows).
+
+## License
+
+All rights reserved. See `LICENSE`. This code is written for this review and its local files only. It may not be used for other studies or other purposes.
