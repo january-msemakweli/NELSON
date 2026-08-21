@@ -40,6 +40,7 @@ NELSON/
     plot_biochar_production.py
     plot_biochar_properties.py
     plot_soil_bioavailability.py
+    plot_plant_metal_reduction.py
   figures/
 ```
 
@@ -71,6 +72,7 @@ python scripts/plot_feedstock_composition.py
 python scripts/plot_biochar_production.py
 python scripts/plot_biochar_properties.py
 python scripts/plot_soil_bioavailability.py
+python scripts/plot_plant_metal_reduction.py
 ```
 
 | Script | Output | What it shows |
@@ -86,6 +88,7 @@ python scripts/plot_soil_bioavailability.py
 | `plot_biochar_production.py` | `biochar_production_conditions` (A-D), plus standalone A, B, C, and D files | Pyrolysis temperature, modification, and biochar properties |
 | `plot_biochar_properties.py` | `biochar_physicochemical_properties` (A-D), plus standalone A-D files | Biochar pH, surface area, ash, and CEC by feedstock category |
 | `plot_soil_bioavailability.py` | `soil_bioavailability_change` | Cleveland plot of soil-bioavailability % change by feedstock |
+| `plot_plant_metal_reduction.py` | `plant_metal_reduction` | Cleveland plot of edible-tissue metal % reduction by PTE |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -106,6 +109,8 @@ The production-conditions figure is extraction-level (one `extraction_id` per tr
 The physicochemical figure is also extraction-level. It uses the same hierarchical feedstock groups. CEC is restricted to values reported for the biochar, not the soil. Sample size varies by property because not every treatment reported pH, surface area, ash, or CEC.
 
 The bioavailability Cleveland plot uses extraction x PTE points with a parsed numeric percentage. Positive values are reductions in soil bioavailability. Increases are plotted as negative values. Ranges are entered as the midpoint. When several methods or harvests are reported for the same metal, the preferred available/DTPA/CaCl2/exchangeable value is kept, otherwise the median is used. Treatments without a usable percentage are omitted.
+
+The plant-metal Cleveland plot uses the same extraction-level layout and styling. Panels are target PTEs. Point shape and color are the hierarchical feedstock group. Values come from `change_in_plant_metal_uptake`. Edible, shoot, leaf, and fruit percentages are preferred over root or stem. Several cultivars, seasons, or harvests for the same metal are entered as the median. Qualitative records, translocation-only values, and unnamed total-metal ranges are omitted.
 
 ## Requirements
 

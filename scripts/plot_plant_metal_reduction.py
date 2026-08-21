@@ -178,10 +178,11 @@ def parse_effects(text: str, targets: str) -> list[tuple[str, float]]:
         return any(a <= pos < b for a, b in used)
 
     def clause_at(pos: int, end: int) -> str:
-        start = max(text.rfind(";", 0, pos), text.rfind(".", 0, pos)) + 1
-        stops = [i for i in (text.find(";", pos), text.find(".", pos)) if i >= 0]
-        stop = min(stops) if stops else len(text)
-        return text[max(start, 0) : max(stop, end)]
+        starts = [m.end() for m in re.finditer(r"[.;]\s", text[:pos])]
+        start = starts[-1] if starts else 0
+        nxt = re.search(r"[.;]\s|[.;]$", text[pos:])
+        stop = pos + nxt.start() if nxt else len(text)
+        return text[start:max(stop, end)]
 
     def add(metal: str, value: float, pos: int, end: int) -> None:
         if already(pos):
@@ -457,12 +458,11 @@ def plot_effects(effects: pd.DataFrame) -> None:
     ax_leg.set_axis_off()
     ax_leg.set_clip_on(False)
     handles = legend_handles(effects)
-    n_rows = 2
-    n_cols = int(np.ceil(len(handles) / n_rows))
+    n_cols = 2
     leg = ax_leg.legend(
         handles=handles,
-        loc="upper left",
-        bbox_to_anchor=(0.12, 1.0),
+        loc="upper center",
+        bbox_to_anchor=(0.50, 0.42),
         ncol=n_cols,
         frameon=True,
         fancybox=False,
