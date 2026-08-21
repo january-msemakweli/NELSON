@@ -2,6 +2,8 @@
 
 Analysis files and figure scripts for this systematic review.
 
+Analyst: January G. Msemakweli
+
 Figures are generated from the standardized analysis set.
 
 ## Data
