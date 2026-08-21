@@ -35,6 +35,7 @@ NELSON/
     plot_experimental_settings.py
     plot_contamination_sources.py
     plot_target_ptes.py
+    plot_leafy_vegetables.py
   figures/
 ```
 
@@ -61,6 +62,7 @@ python scripts/plot_geographic_distribution.py
 python scripts/plot_experimental_settings.py
 python scripts/plot_contamination_sources.py
 python scripts/plot_target_ptes.py
+python scripts/plot_leafy_vegetables.py
 ```
 
 | Script | Output | What it shows |
@@ -71,6 +73,7 @@ python scripts/plot_target_ptes.py
 | `plot_experimental_settings.py` | `experimental_settings` | Greenhouse, pot, field, and other settings |
 | `plot_contamination_sources.py` | `contamination_sources` | Contamination source categories |
 | `plot_target_ptes.py` | `target_ptes` | Unique studies investigating each target PTE |
+| `plot_leafy_vegetables.py` | `leafy_vegetables` | Unique study-species combinations |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -81,6 +84,8 @@ Greenhouse and pot are separated using the original extraction wording. The anal
 Contamination sources are mutually exclusive at the study level. Naturally contaminated soils with a stated origin are coded as mining, industrial, or wastewater irrigation. Studies with both spiked and natural arms are `Mixed/other`.
 
 The PTE chart counts a study once for each metal it investigated, so the bars do not sum to 63.
+
+The vegetable chart counts unique study-species combinations, not treatment rows. `Others` includes coriander, rapeseed, cabbage, crown daisy, and remaining crops not in the named list.
 
 ## Requirements
 
