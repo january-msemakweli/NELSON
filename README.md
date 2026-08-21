@@ -34,6 +34,7 @@ NELSON/
     plot_geographic_distribution.py
     plot_experimental_settings.py
     plot_contamination_sources.py
+    plot_target_ptes.py
   figures/
 ```
 
@@ -59,6 +60,7 @@ python scripts/plot_publication_trends.py
 python scripts/plot_geographic_distribution.py
 python scripts/plot_experimental_settings.py
 python scripts/plot_contamination_sources.py
+python scripts/plot_target_ptes.py
 ```
 
 | Script | Output | What it shows |
@@ -68,6 +70,7 @@ python scripts/plot_contamination_sources.py
 | `plot_geographic_distribution.py` | `geographic_distribution` | Unique studies by country |
 | `plot_experimental_settings.py` | `experimental_settings` | Greenhouse, pot, field, and other settings |
 | `plot_contamination_sources.py` | `contamination_sources` | Contamination source categories |
+| `plot_target_ptes.py` | `target_ptes` | Unique studies investigating each target PTE |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -76,6 +79,8 @@ The map counts a multi-country study once in each listed country (one paper in D
 Greenhouse and pot are separated using the original extraction wording. The analysis-set `experiment_type` column had collapsed those two.
 
 Contamination sources are mutually exclusive at the study level. Naturally contaminated soils with a stated origin are coded as mining, industrial, or wastewater irrigation. Studies with both spiked and natural arms are `Mixed/other`.
+
+The PTE chart counts a study once for each metal it investigated, so the bars do not sum to 63.
 
 ## Requirements
 
