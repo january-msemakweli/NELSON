@@ -280,16 +280,16 @@ def save_figure(fig, stem: Path) -> None:
 
 
 def plot_combined(cat: pd.DataFrame, spec: pd.DataFrame) -> None:
-    fig = plt.figure(figsize=(8.8, 15.2))
+    fig = plt.figure(figsize=(16.6, 10.8))
     gs = GridSpec(
-        2,
         1,
-        height_ratios=[2.15, 3.55],
-        hspace=0.22,
-        left=0.44,
-        right=0.97,
-        top=0.955,
-        bottom=0.05,
+        2,
+        width_ratios=[1.08, 1.0],
+        wspace=0.58,
+        left=0.22,
+        right=0.985,
+        top=0.90,
+        bottom=0.08,
         figure=fig,
     )
     ax_a = fig.add_subplot(gs[0])
