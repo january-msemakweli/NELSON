@@ -45,6 +45,7 @@ NELSON/
     plot_plant_uptake_boxplots.py
     plot_temperature_reduction.py
     plot_property_performance.py
+    plot_application_conditions.py
   figures/
 ```
 
@@ -81,6 +82,7 @@ python scripts/plot_health_risk_matrix.py
 python scripts/plot_plant_uptake_boxplots.py
 python scripts/plot_temperature_reduction.py
 python scripts/plot_property_performance.py
+python scripts/plot_application_conditions.py
 ```
 
 | Script | Output | What it shows |
@@ -101,6 +103,7 @@ python scripts/plot_property_performance.py
 | `plot_plant_uptake_boxplots.py` | `plant_uptake_reduction_by_feedstock` | Boxplots of edible-part PTE % reduction by feedstock category |
 | `plot_temperature_reduction.py` | `temperature_vs_reduction` | Pyrolysis temperature vs plant-uptake and soil-bioavailability reduction |
 | `plot_property_performance.py` | `property_performance_matrix` | Biochar pH, surface area, CEC, and ash vs plant-uptake reduction |
+| `plot_application_conditions.py` | `application_conditions` | Application rate, soil pH, and initial PTE concentration vs plant-metal reduction |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -131,6 +134,8 @@ The plant-uptake boxplots use the same edible-tissue percentages as the Clevelan
 The temperature figure is treatment-level. Panel A is the median edible-part plant-metal reduction. Panel B is the median soil-bioavailability reduction. Treatments without a numeric pyrolysis temperature are omitted. Bubble size is application rate as % w/w. Treatments that reported only t/ha are drawn at the median % w/w size (2.5%). A small horizontal jitter is added so treatments that share a temperature do not sit on top of one another.
 
 The property-performance matrix is also treatment-level. Each panel uses the median edible-part plant-metal reduction against one biochar property. Sample size differs because not every treatment reported pH, surface area, CEC, or ash. CEC is restricted to values reported for the biochar.
+
+The application-condition figure uses the same plant-metal reduction. Panels A and B are treatment-level medians. Panel A uses application rate as % w/w (treatments reported only in t/ha are omitted). Panel B is initial soil pH. Panel C matches each metal's plant reduction to that metal's initial soil concentration. Ranges are entered as the midpoint. Total soil values are preferred over DTPA or available fractions. Multi-dose lists, two-site composites, wastewater mg/L records, and mmol/kg amendments are omitted.
 
 ## Requirements
 
