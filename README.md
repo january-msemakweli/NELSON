@@ -43,6 +43,7 @@ NELSON/
     plot_plant_metal_reduction.py
     plot_health_risk_matrix.py
     plot_plant_uptake_boxplots.py
+    plot_temperature_reduction.py
   figures/
 ```
 
@@ -77,6 +78,7 @@ python scripts/plot_soil_bioavailability.py
 python scripts/plot_plant_metal_reduction.py
 python scripts/plot_health_risk_matrix.py
 python scripts/plot_plant_uptake_boxplots.py
+python scripts/plot_temperature_reduction.py
 ```
 
 | Script | Output | What it shows |
@@ -95,6 +97,7 @@ python scripts/plot_plant_uptake_boxplots.py
 | `plot_plant_metal_reduction.py` | `plant_metal_reduction` | Cleveland plot of edible-tissue metal % reduction by PTE |
 | `plot_health_risk_matrix.py` | `health_risk_evidence` | Study-level HQ, HI, and CR evidence matrix |
 | `plot_plant_uptake_boxplots.py` | `plant_uptake_reduction_by_feedstock` | Boxplots of edible-part PTE % reduction by feedstock category |
+| `plot_temperature_reduction.py` | `temperature_vs_reduction` | Pyrolysis temperature vs plant-uptake and soil-bioavailability reduction |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -121,6 +124,8 @@ The plant-metal Cleveland plot uses the same extraction-level layout and styling
 The health-risk matrix is study-level. Columns are HQ, HI, and CR. Dietary exposure was not extracted as its own field. A cell is coded as still above threshold if any treatment in that study remained above the reported limit (HQ/HI of 1, or a stated CR limit). Below-threshold values are used when all usable numbers sit under that limit. Decrease without a threshold is coded as reported, decreased. Studies that reported none of these metrics are grouped as Others (n = 54).
 
 The plant-uptake boxplots use the same edible-tissue percentages as the Cleveland plot. Each point is one extraction x PTE estimate. Categories are the 13 standard feedstock classes. The n under each box is the number of PTE estimates.
+
+The temperature figure is treatment-level. Panel A is the median edible-part plant-metal reduction. Panel B is the median soil-bioavailability reduction. Treatments without a numeric pyrolysis temperature are omitted. Bubble size is application rate as % w/w. Treatments that reported only t/ha are drawn at the median % w/w size (2.5%). A small horizontal jitter is added so treatments that share a temperature do not sit on top of one another.
 
 ## Requirements
 
