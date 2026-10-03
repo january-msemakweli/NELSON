@@ -41,6 +41,7 @@ NELSON/
     plot_biochar_properties.py
     plot_soil_bioavailability.py
     plot_plant_metal_reduction.py
+    plot_health_risk_matrix.py
   figures/
 ```
 
@@ -73,6 +74,7 @@ python scripts/plot_biochar_production.py
 python scripts/plot_biochar_properties.py
 python scripts/plot_soil_bioavailability.py
 python scripts/plot_plant_metal_reduction.py
+python scripts/plot_health_risk_matrix.py
 ```
 
 | Script | Output | What it shows |
@@ -89,6 +91,7 @@ python scripts/plot_plant_metal_reduction.py
 | `plot_biochar_properties.py` | `biochar_physicochemical_properties` (A-D), plus standalone A-D files | Biochar pH, surface area, ash, and CEC by feedstock category |
 | `plot_soil_bioavailability.py` | `soil_bioavailability_change` | Cleveland plot of soil-bioavailability % change by feedstock |
 | `plot_plant_metal_reduction.py` | `plant_metal_reduction` | Cleveland plot of edible-tissue metal % reduction by PTE |
+| `plot_health_risk_matrix.py` | `health_risk_evidence` | Study-level HQ, HI, and CR evidence matrix |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -111,6 +114,8 @@ The physicochemical figure is also extraction-level. It uses the same standard f
 The bioavailability Cleveland plot uses extraction x PTE points with a parsed numeric percentage. Positive values are reductions in soil bioavailability. Increases are plotted as negative values. Ranges are entered as the midpoint. When several methods or harvests are reported for the same metal, the preferred available/DTPA/CaCl2/exchangeable value is kept, otherwise the median is used. Treatments without a usable percentage are omitted.
 
 The plant-metal Cleveland plot uses the same extraction-level layout and styling. Panels are target PTEs. Point shape and color are the standard feedstock class. Values come from `change_in_plant_metal_uptake`. Edible, shoot, leaf, and fruit percentages are preferred over root or stem. Several cultivars, seasons, or harvests for the same metal are entered as the median. Qualitative records, translocation-only values, and unnamed total-metal ranges are omitted.
+
+The health-risk matrix is study-level. Columns are HQ, HI, and CR. Dietary exposure was not extracted as its own field. A cell is coded as still above threshold if any treatment in that study remained above the reported limit (HQ/HI of 1, or a stated CR limit). Below-threshold values are used when all usable numbers sit under that limit. Decrease without a threshold is coded as reported, decreased. Studies that reported none of these metrics are grouped as Others (n = 54).
 
 ## Requirements
 
