@@ -46,6 +46,7 @@ NELSON/
     plot_temperature_reduction.py
     plot_property_performance.py
     plot_application_conditions.py
+    plot_mechanism_map.py
   figures/
 ```
 
@@ -83,6 +84,7 @@ python scripts/plot_plant_uptake_boxplots.py
 python scripts/plot_temperature_reduction.py
 python scripts/plot_property_performance.py
 python scripts/plot_application_conditions.py
+python scripts/plot_mechanism_map.py
 ```
 
 | Script | Output | What it shows |
@@ -104,6 +106,7 @@ python scripts/plot_application_conditions.py
 | `plot_temperature_reduction.py` | `temperature_vs_reduction` | Pyrolysis temperature vs plant-uptake and soil-bioavailability reduction |
 | `plot_property_performance.py` | `property_performance_matrix` | Biochar pH, surface area, CEC, and ash vs plant-uptake reduction |
 | `plot_application_conditions.py` | `application_conditions` | Application rate, soil pH, and initial PTE concentration vs plant-metal reduction |
+| `plot_mechanism_map.py` | `mechanism_evidence_map` | Study counts for immobilization mechanisms by feedstock and by major PTE |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -136,6 +139,8 @@ The temperature figure is treatment-level. Panel A is the median edible-part pla
 The property-performance matrix is also treatment-level. Each panel uses the median edible-part plant-metal reduction against one biochar property. Sample size differs because not every treatment reported pH, surface area, CEC, or ash. CEC is restricted to values reported for the biochar.
 
 The application-condition figure uses the same plant-metal reduction. Panels A and B are treatment-level medians. Panel A uses application rate as % w/w (treatments reported only in t/ha are omitted). Panel B is initial soil pH. Panel C matches each metal's plant reduction to that metal's initial soil concentration. Ranges are entered as the midpoint. Total soil values are preferred over DTPA or available fractions. Multi-dose lists, two-site composites, wastewater mg/L records, and mmol/kg amendments are omitted.
+
+The mechanism map is study-level. Rows are the 13 immobilization mechanisms from the manuscript outline. Panel A columns are the standard feedstock classes. Panel B columns are Cd, Pb, Cr, Ni, As, Cu, and Zn (Cr(VI) is counted with Cr). A study is counted once in a cell if any of its extractions report that mechanism for that feedstock or target metal. Mechanisms are read from the extracted immobilization-mechanism text, not from the coarser mechanism_std labels.
 
 ## Requirements
 
