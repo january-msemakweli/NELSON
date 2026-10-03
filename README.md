@@ -47,6 +47,7 @@ NELSON/
     plot_property_performance.py
     plot_application_conditions.py
     plot_mechanism_map.py
+    plot_evidence_gap.py
   figures/
 ```
 
@@ -85,6 +86,7 @@ python scripts/plot_temperature_reduction.py
 python scripts/plot_property_performance.py
 python scripts/plot_application_conditions.py
 python scripts/plot_mechanism_map.py
+python scripts/plot_evidence_gap.py
 ```
 
 | Script | Output | What it shows |
@@ -107,6 +109,7 @@ python scripts/plot_mechanism_map.py
 | `plot_property_performance.py` | `property_performance_matrix` | Biochar pH, surface area, CEC, and ash vs plant-uptake reduction |
 | `plot_application_conditions.py` | `application_conditions` | Application rate, soil pH, and initial PTE concentration vs plant-metal reduction |
 | `plot_mechanism_map.py` | `mechanism_evidence_map` | Study counts for immobilization mechanisms by feedstock and by major PTE |
+| `plot_evidence_gap.py` | `evidence_gap_map` | Study counts for major outcomes by feedstock category |
 
 Risk-of-bias ratings are collapsed to the study. If a study has more than one extraction, the more conservative rating is kept.
 
@@ -141,6 +144,8 @@ The property-performance matrix is also treatment-level. Each panel uses the med
 The application-condition figure uses the same plant-metal reduction. Panels A and B are treatment-level medians. Panel A uses application rate as % w/w (treatments reported only in t/ha are omitted). Panel B is initial soil pH. Panel C matches each metal's plant reduction to that metal's initial soil concentration. Ranges are entered as the midpoint. Total soil values are preferred over DTPA or available fractions. Multi-dose lists, two-site composites, wastewater mg/L records, and mmol/kg amendments are omitted.
 
 The mechanism map is study-level. Rows are the 13 immobilization mechanisms from the manuscript outline. Panel A columns are the standard feedstock classes. Panel B columns are Cd, Pb, Cr, Ni, As, Cu, and Zn (Cr(VI) is counted with Cr). A study is counted once in a cell if any of its extractions report that mechanism for that feedstock or target metal. Mechanisms are read from the extracted immobilization-mechanism text, not from the coarser mechanism_std labels.
+
+The evidence-gap map is also study-level. Rows are feedstock classes. Columns are soil bioavailability, edible-tissue PTE, BCF/BAF/TF, plant growth, HQ, HI, CR, long-term performance, field validation, and advanced mechanistic characterization. Bubble size is the number of studies. Long-term is an experimental duration or incubation of at least 180 days. Advanced characterization is XRD, XPS, SEM, TEM, XAS, XANES, EXAFS, NMR, or XRF, not routine FTIR alone. Plant growth is counted when biomass or yield is mentioned in the findings.
 
 ## Requirements
 
