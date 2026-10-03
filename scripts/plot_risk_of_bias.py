@@ -79,11 +79,7 @@ def study_level(df: pd.DataFrame) -> pd.DataFrame:
             rec[col] = worst(g[col], OVERALL_WORST if kind == "overall" else ITEM_WORST)
         rows.append(rec)
     out = pd.DataFrame(rows)
-    dup = out["citation"].duplicated(keep=False)
     out["label"] = out["citation"]
-    out.loc[dup, "label"] = out.loc[dup].apply(
-        lambda r: f"{r['citation']} ({r['study_id']})", axis=1
-    )
     out = out.sort_values(
         ["first_author", "year", "study_id"], kind="mergesort"
     ).reset_index(drop=True)

@@ -237,18 +237,12 @@ def load_effects() -> pd.DataFrame:
                     "specific_feedstock": rec["specific_feedstock"],
                     "metal": metal,
                     "pct_reduction": value,
-                    "label": f"{rec['citation']} ({rec['extraction_id']})",
                 }
             )
     out = pd.DataFrame(rows)
     if out.empty:
         return out
-    # Prefer a short label when a study has one extraction in the plot
-    counts = out.groupby("citation")["extraction_id"].nunique()
-    out["y_label"] = out.apply(
-        lambda r: r["citation"] if counts[r["citation"]] == 1 else r["label"],
-        axis=1,
-    )
+    out["y_label"] = out["citation"]
     return out
 
 
