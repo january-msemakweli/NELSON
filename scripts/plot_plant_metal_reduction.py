@@ -3,7 +3,7 @@ Plant-metal reduction in edible/shoot tissue.
 
 Cleveland dot plot: one point per extraction x PTE with a numeric
 percentage change. Positive values are reductions. Facets are target
-PTEs. Point shape and color are the hierarchical feedstock group.
+PTEs. Point shape and color are the standard feedstock class.
 """
 
 from __future__ import annotations
@@ -27,7 +27,12 @@ OUT = FIGDIR / "plant_metal_reduction"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from plot_feedstock_composition import CATEGORY_ORDER, SPECIFIC_TO_CATEGORY
+from plot_feedstock_composition import (
+    CATEGORY_ORDER,
+    FEEDSTOCK_COLORS,
+    FEEDSTOCK_MARKERS,
+    standard_category,
+)
 from plot_target_ptes import PTE_ORDER
 
 LABEL_COLOR = "#1A1A1A"
@@ -51,25 +56,6 @@ METAL_NAMES = {
     "CR": "Cr",
 }
 
-FEEDSTOCK_MARKERS = {
-    "Seed/husk/shell residues": "o",
-    "Crop residue": "s",
-    "Processing residue": "D",
-    "Fruit waste": "^",
-    "Vegetable residue": "v",
-    "Mixed residues": "P",
-}
-
-FEEDSTOCK_COLORS = {
-    "Seed/husk/shell residues": "#1B7F4E",
-    "Crop residue": "#E07B39",
-    "Processing residue": "#4C72B0",
-    "Fruit waste": "#C44E52",
-    "Vegetable residue": "#8172B3",
-    "Mixed residues": "#937860",
-}
-
-
 def style() -> None:
     plt.rcParams.update(
         {
@@ -85,8 +71,8 @@ def style() -> None:
     )
 
 
-def feedstock_group(specific: str) -> str:
-    return SPECIFIC_TO_CATEGORY.get(specific.strip(), "Mixed residues")
+def feedstock_group(specific: str, recorded: str = "") -> str:
+    return standard_category(specific, recorded)
 
 
 def midpoint(a: str, b: str | None) -> float:
@@ -317,7 +303,9 @@ def load_effects() -> pd.DataFrame:
                     "study_id": rec["study_id"],
                     "citation": rec["citation"],
                     "year": rec["year"],
-                    "feedstock_group": feedstock_group(rec["specific_feedstock"]),
+                    "feedstock_group": feedstock_group(
+                        rec["specific_feedstock"], rec["feedstock_category"]
+                    ),
                     "specific_feedstock": rec["specific_feedstock"],
                     "metal": metal,
                     "pct_reduction": value,
@@ -475,7 +463,7 @@ def plot_effects(effects: pd.DataFrame) -> None:
         borderpad=0.8,
         labelspacing=0.75,
         borderaxespad=0.15,
-        title="Feedstock group",
+        title="Feedstock category",
         title_fontsize=11,
     )
     leg.set_clip_on(False)

@@ -9,7 +9,7 @@ year,Integer,Publication year.
 doi,Text,DOI with prefix and whitespace removed. NR if missing.
 country,Text,Country of the experiment. Multi-country values are semicolon-separated.
 n_countries,Integer,Number of countries listed.
-feedstock_category,Category,"Harmonized feedstock class: Straw, Husk, Shell, Crop residue, Peel, Pulp, Seed residue, Fruit processing waste, Vegetable processing waste, Agricultural residue, Mixed."
+feedstock_category,Category,"Standard feedstock class from the corrected extraction file: Cereal field residue, Cereal processing residue, Fruit and nut processing residue, Oilseed processing residue, Oil-palm processing residue, Sugar-crop processing residue, Agricultural/root processing residue, Vegetable processing residue, Industrial/fiber crop residue, Legume crop residue, Seed-processing residue, Mixed postharvest agricultural residues, or Mixed eligible and non-eligible feedstocks."
 specific_feedstock,Category,"Harmonized feedstock name (e.g., Rice hull -> Rice husk; corn straw -> Maize straw; Açaí seed -> Acai seed)."
 feedstock_single_or_mixed,Category,Single or Mixed.
 feedstock_composition,Text,Cleaned composition string. Co-applied non-feedstock materials are also in co_amendment.
@@ -20,7 +20,7 @@ carbonization_method,Category,"Slow pyrolysis, Fast pyrolysis, Co-pyrolysis, Sla
 carbonization_atmosphere,Category,"N2, Oxygen-limited, or NR if not stated."
 biochar_modification,Text,Cleaned modification description. None if unmodified.
 modification_present,Yes/No,Yes if the biochar was modified after or during production.
-modification_class,Category,"None, Phosphate-enriched, Fe modified, Fe-Mn modified, Fe-Mg modified, FeCl3 modified, nZVI, N-doped, Particle-size reduced (nano), Microbially loaded, Physical composite."
+modification_class,Category,"None, Phosphate-enriched, Fe modified, Fe-Mn modified, Fe-Mg modified, FeCl3 modified, nZVI, N-doped, Particle-size reduced (nano), Microbially loaded, Physical composite, Thiourea-modified."
 pyrolysis_temp_c,Number,Pyrolysis temperature in C. Midpoint if a range was reported.
 pyrolysis_temp_min_c,Number,Lower bound of reported temperature range.
 pyrolysis_temp_max_c,Number,Upper bound of reported temperature range.

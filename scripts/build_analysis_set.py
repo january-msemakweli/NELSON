@@ -13,12 +13,10 @@ from pathlib import Path
 
 import pandas as pd
 
-SRC = Path(
-    r"C:\Users\msema\OneDrive\Documentos\Manuscripts\NELSON"
-    r"\Engineer Nelsons Review  (Responses) - Form Responses.csv"
-)
-DST = Path(r"C:\Users\msema\OneDrive\Documentos\Manuscripts\NELSON\ANALYSIS SET.csv")
-LOG = Path(r"C:\Users\msema\OneDrive\Documentos\Manuscripts\NELSON\_standardize_log.txt")
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "Engineer Nelsons Review  (Responses) - Form Responses 1 - Corrected.csv"
+DST = ROOT / "ANALYSIS SET.csv"
+LOG = ROOT / "_standardize_log.txt"
 
 
 # ---------------------------------------------------------------------------
@@ -306,61 +304,59 @@ FEEDSTOCK_SPECIFIC = {
     "wheat straw + orange peel + rice husk": "Wheat straw + orange peel + rice husk",
 }
 
+# Standard classes from the corrected extraction file. Keep this wording.
 FEEDSTOCK_CATEGORY = {
-    "straw": "Straw",
-    "husk": "Husk",
-    "shell": "Shell",
-    "crop residue": "Crop residue",
-    "agricultural residue": "Agricultural residue",
-    "fruit processing waste": "Fruit processing waste",
-    "rice processing waste": "Husk",
-    "seed residue": "Seed residue",
-    "vegetable processing waste": "Vegetable processing waste",
-    "mixed agricultural residues + livestock manure": "Mixed",
-    "processing residue (agricultural waste)": "Agricultural residue",
-    "pulp (sugar crop residue)": "Pulp",
-    "fruit waste (plantain peel)": "Peel",
-    "peels": "Peel",
-    "crop residue + fruit waste": "Mixed",
-    "fruit processing waste, husk": "Mixed",
-    "agricultural processing residue": "Agricultural residue",
-    "agro-industrial processing residue": "Agricultural residue",
+    "agricultural/root processing residue": "Agricultural/root processing residue",
+    "cereal field residue": "Cereal field residue",
+    "cereal processing residue": "Cereal processing residue",
+    "fruit and nut processing residue": "Fruit and nut processing residue",
+    "industrial/fiber crop residue": "Industrial/fiber crop residue",
+    "legume crop residue": "Legume crop residue",
+    "mixed eligible and non-eligible feedstocks": "Mixed eligible and non-eligible feedstocks",
+    "mixed postharvest agricultural residues": "Mixed postharvest agricultural residues",
+    "oil-palm processing residue": "Oil-palm processing residue",
+    "oilseed processing residue": "Oilseed processing residue",
+    "seed-processing residue": "Seed-processing residue",
+    "sugar-crop processing residue": "Sugar-crop processing residue",
+    "vegetable processing residue": "Vegetable processing residue",
 }
 
+# Fallback only when the form category is missing. Values match the
+# corrected standard classes, not the older Husk/Straw/Shell labels.
 FEEDSTOCK_TO_CATEGORY = {
-    "Rice husk": "Husk",
-    "Rice straw": "Straw",
-    "Rice stem": "Straw",
-    "Wheat straw": "Straw",
-    "Wheat husk": "Husk",
-    "Maize straw": "Straw",
-    "Maize stover": "Crop residue",
-    "Maize stalk": "Crop residue",
-    "Maize straw + cow dung": "Mixed",
-    "Peanut shell": "Shell",
-    "Pistachio shell": "Shell",
-    "Coconut shell": "Shell",
-    "Coconut husk": "Husk",
-    "Sugarcane bagasse": "Crop residue",
-    "Sugarcane filter cake": "Agricultural residue",
-    "Sugar beet pulp": "Pulp",
-    "Licorice root pulp": "Pulp",
-    "Hazelnut husk": "Husk",
-    "Oil palm bunch": "Crop residue",
-    "Camellia oleifera shell": "Shell",
-    "Tobacco straw": "Straw",
-    "Acai seed": "Seed residue",
-    "Cereal and grass seed residues": "Seed residue",
-    "Vegetable waste": "Vegetable processing waste",
-    "Vegetable waste + thiourea": "Vegetable processing waste",
-    "Lemon waste": "Fruit processing waste",
-    "Orange peel": "Peel",
-    "Orange bagasse": "Fruit processing waste",
-    "Banana peel": "Peel",
-    "Plantain peel": "Peel",
-    "Pigeon pea stalk": "Crop residue",
-    "Cotton stalk": "Crop residue",
-    "Wheat straw + orange peel + rice husk": "Mixed",
+    "Rice husk": "Cereal processing residue",
+    "Wheat husk": "Cereal processing residue",
+    "Rice straw": "Cereal field residue",
+    "Rice stem": "Cereal field residue",
+    "Wheat straw": "Cereal field residue",
+    "Maize straw": "Cereal field residue",
+    "Maize stover": "Cereal field residue",
+    "Maize stalk": "Cereal field residue",
+    "Peanut shell": "Oilseed processing residue",
+    "Camellia oleifera shell": "Oilseed processing residue",
+    "Pistachio shell": "Fruit and nut processing residue",
+    "Coconut shell": "Fruit and nut processing residue",
+    "Coconut husk": "Fruit and nut processing residue",
+    "Hazelnut husk": "Fruit and nut processing residue",
+    "Acai seed": "Fruit and nut processing residue",
+    "Lemon waste": "Fruit and nut processing residue",
+    "Orange peel": "Fruit and nut processing residue",
+    "Orange bagasse": "Fruit and nut processing residue",
+    "Banana peel": "Fruit and nut processing residue",
+    "Plantain peel": "Fruit and nut processing residue",
+    "Cotton stalk": "Industrial/fiber crop residue",
+    "Tobacco straw": "Industrial/fiber crop residue",
+    "Pigeon pea stalk": "Legume crop residue",
+    "Oil palm bunch": "Oil-palm processing residue",
+    "Sugarcane bagasse": "Sugar-crop processing residue",
+    "Sugarcane filter cake": "Sugar-crop processing residue",
+    "Sugar beet pulp": "Sugar-crop processing residue",
+    "Licorice root pulp": "Agricultural/root processing residue",
+    "Cereal and grass seed residues": "Seed-processing residue",
+    "Vegetable waste": "Vegetable processing residue",
+    "Vegetable waste + thiourea": "Vegetable processing residue",
+    "Wheat straw + orange peel + rice husk": "Mixed postharvest agricultural residues",
+    "Maize straw + cow dung": "Mixed eligible and non-eligible feedstocks",
 }
 
 CARBONIZATION = [
@@ -387,6 +383,7 @@ MOD_CLASS = [
     (r"fecl3", "FeCl3 modified"),
     (r"fe-loaded|fe\(no3|aqueous co-precipitation|\bfe\b", "Fe modified"),
     (r"physically mixing|composite", "Physical composite"),
+    (r"thiourea", "Thiourea-modified"),
 ]
 
 CO_CLASS = [
@@ -589,10 +586,10 @@ def std_feedstock(s: str) -> str:
 
 
 def std_feedstock_cat(raw_cat: str, specific: str) -> str:
-    if specific in FEEDSTOCK_TO_CATEGORY:
-        return FEEDSTOCK_TO_CATEGORY[specific]
-    key = clean_text(raw_cat).lower()
-    return FEEDSTOCK_CATEGORY.get(key, clean_text(raw_cat).title() if not is_missing(raw_cat) else "NR")
+    s = clean_text(raw_cat)
+    if not is_missing(s):
+        return FEEDSTOCK_CATEGORY.get(fold_ascii(s), s)
+    return FEEDSTOCK_TO_CATEGORY.get(specific, "NR")
 
 
 def std_single_mixed(s: str) -> str:
@@ -1122,7 +1119,7 @@ def main():
         ("doi", "Text", "DOI with prefix and whitespace removed. NR if missing."),
         ("country", "Text", "Country of the experiment. Multi-country values are semicolon-separated."),
         ("n_countries", "Integer", "Number of countries listed."),
-        ("feedstock_category", "Category", "Harmonized feedstock class: Straw, Husk, Shell, Crop residue, Peel, Pulp, Seed residue, Fruit processing waste, Vegetable processing waste, Agricultural residue, Mixed."),
+        ("feedstock_category", "Category", "Standard feedstock class from the corrected extraction file: Cereal field residue, Cereal processing residue, Fruit and nut processing residue, Oilseed processing residue, Oil-palm processing residue, Sugar-crop processing residue, Agricultural/root processing residue, Vegetable processing residue, Industrial/fiber crop residue, Legume crop residue, Seed-processing residue, Mixed postharvest agricultural residues, or Mixed eligible and non-eligible feedstocks."),
         ("specific_feedstock", "Category", "Harmonized feedstock name (e.g., Rice hull -> Rice husk; corn straw -> Maize straw; Açaí seed -> Acai seed)."),
         ("feedstock_single_or_mixed", "Category", "Single or Mixed."),
         ("feedstock_composition", "Text", "Cleaned composition string. Co-applied non-feedstock materials are also in co_amendment."),
@@ -1133,7 +1130,7 @@ def main():
         ("carbonization_atmosphere", "Category", "N2, Oxygen-limited, or NR if not stated."),
         ("biochar_modification", "Text", "Cleaned modification description. None if unmodified."),
         ("modification_present", "Yes/No", "Yes if the biochar was modified after or during production."),
-        ("modification_class", "Category", "None, Phosphate-enriched, Fe modified, Fe-Mn modified, Fe-Mg modified, FeCl3 modified, nZVI, N-doped, Particle-size reduced (nano), Microbially loaded, Physical composite."),
+        ("modification_class", "Category", "None, Phosphate-enriched, Fe modified, Fe-Mn modified, Fe-Mg modified, FeCl3 modified, nZVI, N-doped, Particle-size reduced (nano), Microbially loaded, Physical composite, Thiourea-modified."),
         ("pyrolysis_temp_c", "Number", "Pyrolysis temperature in C. Midpoint if a range was reported."),
         ("pyrolysis_temp_min_c", "Number", "Lower bound of reported temperature range."),
         ("pyrolysis_temp_max_c", "Number", "Upper bound of reported temperature range."),

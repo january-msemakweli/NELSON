@@ -1,0 +1,217 @@
+rows=100 cols=96
+unique study_id=63
+unique extraction_id=100
+unique citation=61
+unique doi=63
+
+=== KEY CATEGORIES ===
+
+[country]
+  48	China
+  18	Pakistan
+  7	Iran
+  6	Poland
+  5	Brazil
+  5	Turkey
+  3	South Korea
+  3	India
+  2	Vietnam
+  1	Denmark; United Kingdom
+  1	Canada
+  1	Austria
+
+[feedstock_category]
+  27	Cereal field residue
+  24	Cereal processing residue
+  15	Fruit and nut processing residue
+  11	Oilseed processing residue
+  10	Sugar-crop processing residue
+  3	Industrial/fiber crop residue
+  2	Vegetable processing residue
+  2	Agricultural/root processing residue
+  2	Oil-palm processing residue
+  1	Seed-processing residue
+  1	Mixed postharvest agricultural residues
+  1	Mixed eligible and non-eligible feedstocks
+  1	Legume crop residue
+
+[specific_feedstock]
+  23	Rice husk
+  9	Peanut shell
+  9	Wheat straw
+  8	Sugarcane bagasse
+  8	Rice straw
+  6	Maize straw
+  4	Pistachio shell
+  3	Acai seed
+  2	Camellia oleifera shell
+  2	Maize stover
+  2	Tobacco straw
+  2	Vegetable waste
+  2	Licorice root pulp
+  2	Oil palm bunch
+  1	Sugarcane filter cake
+  1	Cereal and grass seed residues
+  1	Rice stem
+  1	Plantain peel
+  1	Sugar beet pulp
+  1	Cotton stalk
+  1	Banana peel
+  1	Hazelnut husk
+  1	Coconut husk
+  1	Orange peel
+  1	Lemon waste
+  1	Orange bagasse
+  1	Wheat straw + orange peel + rice husk
+  1	Maize straw + cow dung
+  1	Wheat husk
+  1	Maize stalk
+  1	Coconut shell
+  1	Pigeon pea stalk
+
+[feedstock_single_or_mixed]
+  96	Single
+  4	Mixed
+
+[co_amendment_class]
+  71	None
+  9	Organic
+  7	Microbial
+  5	Phosphate mineral
+  3	Metal/chemical
+  2	Mineral
+  2	Fertilizer
+  1	Chemical
+
+[carbonization_method]
+  94	Slow pyrolysis
+  2	Co-pyrolysis
+  2	Fast pyrolysis
+  1	NR
+  1	Slash-and-char
+
+[carbonization_atmosphere]
+  76	NR
+  15	Oxygen-limited
+  9	N2
+
+[modification_class]
+  82	None
+  5	Phosphate-enriched
+  2	Microbially loaded
+  2	Particle-size reduced (nano)
+  2	Fe modified
+  1	nZVI
+  1	Physical composite
+  1	Fe-Mn modified
+  1	FeCl3 modified
+  1	Fe-Mg modified
+  1	Thiourea-modified
+  1	N-doped
+
+[experiment_type]
+  90	Pot
+  7	Field
+  2	Growth chamber
+  1	Lysimeter
+
+[soil_type_class]
+  74	Agricultural
+  10	Mine-affected
+  6	Industrial
+  5	Experimental/other
+  4	Wastewater-irrigated
+  1	Paddy
+
+[contamination_source]
+  50	Naturally contaminated
+  46	Artificially spiked
+  4	Both
+
+[target_metals]
+  28	Cd
+  10	Cd; Pb
+  9	Cd; Cr; Cu; Ni; Pb; Zn
+  6	Ni
+  4	As; Cd; F; Hg; Pb
+  4	Pb
+  4	Cr
+  4	As
+  4	Cr; Cu; Fe; Mn; Ni; Pb; Zn
+  3	Cd; Cu; Pb
+  3	As; Cd
+  3	Cd; Pb; Zn
+  2	As; Cd; Cu; Ni; Pb; Zn
+  2	As; Cd; Pb; Zn
+  2	Cd; Cr; Ni; Pb
+  2	Cr; Cr(VI)
+  2	Cd; Cu
+  2	Cu
+  1	As; Pb
+  1	Cd; Cr; Cu; Fe; Pb; Zn
+  1	Cd; Cu; Ni; Pb; Zn
+  1	Al; Cd
+  1	Cr; Pb
+  1	As; Cd; Cr; Ni; Pb; Zn
+
+[edible_part]
+  98	Shoot (leaves)
+  1	Mixed edible tissues
+  1	Fruit/pods
+
+[species_common]
+  33	Lettuce
+  22	Spinach
+  8	Pak choi
+  8	Mustard
+  5	Water spinach
+  4	Coriander
+  4	Crown daisy; Lettuce
+  2	Rapeseed; Shanghaiqing
+  2	Malabar spinach
+  2	Chinese cabbage
+  2	Lettuce; Spinach; Parsley; Dill
+  2	Rapeseed
+  1	Broccoli
+  1	Gynura
+  1	Lettuce; Spinach; Coriander; Cabbage; Chinese cabbage; Pak choi; Amaranth; Ice plant
+  1	Common bean
+  1	Choi sum; Mustard greens; Cabbage; Pak choi
+  1	White mustard
+
+[overall_risk_of_bias]
+  62	Very low
+  35	Low
+  3	Moderate
+
+[reviewer_initials]
+  50	Nelson
+  45	Oscar
+  5	Emmy
+
+[particle_size_class]
+  46	Sieved
+  31	NR
+  18	Mesh
+  3	Nano
+  1	Milli
+  1	Micro
+
+[health_risk_reported]
+  82	No
+  18	Yes
+
+=== NUMERIC COVERAGE ===
+  pyrolysis_temp_c: 91/100
+  residence_time_min: 68/100
+  biochar_ph: 82/100
+  surface_area_m2_g: 47/100
+  ash_content_pct: 35/100
+  cec_cmolc_kg: 36/100
+  soil_ph: 92/100
+  application_rate_pct_ww: 93/100
+  application_rate_t_ha: 12/100
+  soil_incubation_days: 89/100
+  plant_growth_days: 93/100
+  experimental_duration_days: 92/100
+  particle_size_max_mm: 67/100

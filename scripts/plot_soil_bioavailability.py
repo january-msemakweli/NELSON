@@ -3,7 +3,7 @@ Study-level soil-bioavailability change.
 
 Cleveland dot plot: one point per extraction x PTE with a numeric
 percentage change. Positive values are reductions. Facets are
-hierarchical feedstock categories. Point shape (and color) is the PTE.
+standard feedstock classes. Point shape (and color) is the PTE.
 """
 
 from __future__ import annotations
@@ -16,7 +16,6 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
-from matplotlib.gridspec import GridSpec
 from matplotlib.lines import Line2D
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,7 +27,7 @@ OUT = FIGDIR / "soil_bioavailability_change"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from plot_feedstock_composition import CATEGORY_ORDER, SPECIFIC_TO_CATEGORY
+from plot_feedstock_composition import CATEGORY_ORDER, standard_category
 from plot_target_ptes import PTE_ORDER
 
 LABEL_COLOR = "#1A1A1A"
@@ -84,8 +83,8 @@ def style() -> None:
     )
 
 
-def feedstock_group(specific: str) -> str:
-    return SPECIFIC_TO_CATEGORY.get(specific.strip(), "Mixed residues")
+def feedstock_group(specific: str, recorded: str = "") -> str:
+    return standard_category(specific, recorded)
 
 
 def midpoint(a: str, b: str | None) -> float:
@@ -232,7 +231,9 @@ def load_effects() -> pd.DataFrame:
                     "study_id": rec["study_id"],
                     "citation": rec["citation"],
                     "year": rec["year"],
-                    "feedstock_group": feedstock_group(rec["specific_feedstock"]),
+                    "feedstock_group": feedstock_group(
+                        rec["specific_feedstock"], rec["feedstock_category"]
+                    ),
                     "specific_feedstock": rec["specific_feedstock"],
                     "metal": metal,
                     "pct_reduction": value,
@@ -291,7 +292,7 @@ def draw_facet(ax, sub: pd.DataFrame, show_xlabel: bool) -> None:
     ax.set_title(
         f"{sub['feedstock_group'].iloc[0]}  (n = {n_t} treatments, {n_p} PTE points)",
         loc="left",
-        fontsize=11,
+        fontsize=10,
         fontweight="bold",
         color=LABEL_COLOR,
         pad=6,
@@ -317,80 +318,58 @@ def legend_handles(effects: pd.DataFrame) -> list[Line2D]:
 
 
 def plot_effects(effects: pd.DataFrame) -> None:
+    present = [c for c in CATEGORY_ORDER if c in set(effects["feedstock_group"])]
     n_by_cat = {
         cat: int(effects.loc[effects["feedstock_group"] == cat, "extraction_id"].nunique())
-        for cat in CATEGORY_ORDER
-        if cat in set(effects["feedstock_group"])
+        for cat in present
     }
-    seed_n = n_by_cat.get("Seed/husk/shell residues", 3)
-    crop_n = n_by_cat.get("Crop residue", 3)
-    proc_n = n_by_cat.get("Processing residue", 3)
-    veg_n = n_by_cat.get("Vegetable residue", 2)
+    left_cats = present[0::2]
+    right_cats = present[1::2]
 
-    fig = plt.figure(figsize=(16.2, 12.6))
-    gs = GridSpec(
-        3,
-        2,
-        height_ratios=[max(seed_n, crop_n), proc_n, max(veg_n, 3)],
-        hspace=0.32,
-        wspace=0.42,
-        left=0.20,
-        right=0.99,
-        top=0.96,
-        bottom=0.06,
-        figure=fig,
-    )
-    xmin = min(-10.0, float(effects["pct_reduction"].min()) - 5)
-    xmax = max(100.0, float(effects["pct_reduction"].max()) + 5)
-
-    def add_cat(ax, cat: str, xlabel: bool) -> None:
-        sub = effects.loc[effects["feedstock_group"] == cat].copy()
-        draw_facet(ax, sub, show_xlabel=xlabel)
-        ax.set_xlim(xmin, xmax)
-
-    ax_seed = fig.add_subplot(gs[0, 0])
-    ax_crop = fig.add_subplot(gs[0, 1])
-    ax_proc = fig.add_subplot(gs[1, 0])
-    ax_veg = fig.add_subplot(gs[2, 0])
-    add_cat(ax_seed, "Seed/husk/shell residues", False)
-    add_cat(ax_crop, "Crop residue", False)
-    add_cat(ax_proc, "Processing residue", False)
-    add_cat(ax_veg, "Vegetable residue", True)
-
-    pos_seed = ax_seed.get_position()
-    pos_proc = ax_proc.get_position()
-    pos_crop = ax_crop.get_position()
-    pos_veg = ax_veg.get_position()
-    gap = pos_seed.y0 - pos_proc.y1
+    inch_per = 0.175
+    title_in = 0.32
+    gap_in = 0.42
+    xlab_in = 0.42
+    top_m = 0.18
+    bot_m = 0.16
     ylim_extra = 0.4
 
-    def panel_height(n_treat: int) -> float:
-        return pos_proc.height * (n_treat + ylim_extra) / (proc_n + ylim_extra)
+    def stack_in(cats: list[str], extra_in: float = 0.0) -> float:
+        h = top_m + bot_m + extra_in
+        for i, cat in enumerate(cats):
+            h += title_in + (n_by_cat[cat] + ylim_extra) * inch_per
+            if i < len(cats) - 1:
+                h += gap_in
+        return h
 
-    fruit_n = n_by_cat.get("Fruit waste", 2)
-    mixed_n = n_by_cat.get("Mixed residues", 2)
-    fruit_h = panel_height(fruit_n)
-    mixed_h = panel_height(mixed_n)
-    veg_h = panel_height(veg_n)
-    ax_veg.set_position(
-        [pos_veg.x0, pos_veg.y1 - veg_h, pos_veg.width, veg_h]
-    )
-    x0, width = pos_crop.x0, pos_crop.width
-    fruit_top = pos_proc.y1
-    mixed_top = fruit_top - fruit_h - gap
-    add_cat(
-        fig.add_axes([x0, fruit_top - fruit_h, width, fruit_h]),
-        "Fruit waste",
-        False,
-    )
-    add_cat(
-        fig.add_axes([x0, mixed_top - mixed_h, width, mixed_h]),
-        "Mixed residues",
-        True,
-    )
+    fig_w = 16.2
+    fig_h = max(stack_in(left_cats, xlab_in), stack_in(right_cats, xlab_in + 1.6))
+    fig = plt.figure(figsize=(fig_w, fig_h))
+
+    xmin = min(-10.0, float(effects["pct_reduction"].min()) - 5)
+    xmax = max(100.0, float(effects["pct_reduction"].max()) + 5)
+    left_x, width = 0.195, 0.295
+    right_x = 0.685
+
+    def place_column(cats: list[str], x0: float) -> float:
+        y = 1.0 - (top_m / fig_h)
+        for i, cat in enumerate(cats):
+            data_h = (n_by_cat[cat] + ylim_extra) * inch_per / fig_h
+            y -= title_in / fig_h
+            ax = fig.add_axes([x0, y - data_h, width, data_h])
+            sub = effects.loc[effects["feedstock_group"] == cat].copy()
+            draw_facet(ax, sub, show_xlabel=(i == len(cats) - 1))
+            ax.set_xlim(xmin, xmax)
+            y -= data_h
+            if i < len(cats) - 1:
+                y -= gap_in / fig_h
+        return y
+
+    place_column(left_cats, left_x)
+    y_right = place_column(right_cats, right_x)
 
     ax_leg = fig.add_axes(
-        [x0, 0.04, width, max(mixed_top - mixed_h - gap - 0.04, 0.08)]
+        [right_x, 0.035, width, max(y_right - gap_in / fig_h - 0.035, 0.08)]
     )
     ax_leg.set_axis_off()
     ax_leg.set_clip_on(False)

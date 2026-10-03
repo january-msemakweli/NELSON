@@ -65,50 +65,90 @@ SPECIFIC_DISPLAY = {
     "Maize straw + cow dung": "Maize straw + cow dung",
 }
 
+# Standard classes from the corrected extraction file / ANALYSIS SET.
+CATEGORY_ORDER = [
+    "Cereal field residue",
+    "Cereal processing residue",
+    "Fruit and nut processing residue",
+    "Oilseed processing residue",
+    "Sugar-crop processing residue",
+    "Oil-palm processing residue",
+    "Agricultural/root processing residue",
+    "Vegetable processing residue",
+    "Industrial/fiber crop residue",
+    "Legume crop residue",
+    "Seed-processing residue",
+    "Mixed postharvest agricultural residues",
+    "Mixed eligible and non-eligible feedstocks",
+]
+
 SPECIFIC_TO_CATEGORY = {
-    "Rice husk": "Seed/husk/shell residues",
-    "Wheat husk": "Seed/husk/shell residues",
-    "Hazelnut husk": "Seed/husk/shell residues",
-    "Coconut husk": "Seed/husk/shell residues",
-    "Peanut shell": "Seed/husk/shell residues",
-    "Pistachio shell": "Seed/husk/shell residues",
-    "Coconut shell": "Seed/husk/shell residues",
-    "Camellia oleifera shell": "Seed/husk/shell residues",
-    "Acai seed": "Seed/husk/shell residues",
-    "Cereal and grass seed residues": "Seed/husk/shell residues",
-    "Rice straw": "Crop residue",
-    "Wheat straw": "Crop residue",
-    "Maize straw": "Crop residue",
-    "Tobacco straw": "Crop residue",
-    "Rice stem": "Crop residue",
-    "Cotton stalk": "Crop residue",
-    "Maize stover": "Crop residue",
-    "Maize stalk": "Crop residue",
-    "Pigeon pea stalk": "Crop residue",
-    "Banana peel": "Fruit waste",
-    "Plantain peel": "Fruit waste",
-    "Orange peel": "Fruit waste",
-    "Orange bagasse": "Fruit waste",
-    "Lemon waste": "Fruit waste",
-    "Sugarcane bagasse": "Processing residue",
-    "Sugarcane filter cake": "Processing residue",
-    "Licorice root pulp": "Processing residue",
-    "Sugar beet pulp": "Processing residue",
-    "Oil palm bunch": "Processing residue",
-    "Vegetable waste": "Vegetable residue",
-    "Vegetable waste + thiourea": "Vegetable residue",
-    "Wheat straw + orange peel + rice husk": "Mixed residues",
-    "Maize straw + cow dung": "Mixed residues",
+    "Rice husk": "Cereal processing residue",
+    "Wheat husk": "Cereal processing residue",
+    "Rice straw": "Cereal field residue",
+    "Rice stem": "Cereal field residue",
+    "Wheat straw": "Cereal field residue",
+    "Maize straw": "Cereal field residue",
+    "Maize stover": "Cereal field residue",
+    "Maize stalk": "Cereal field residue",
+    "Peanut shell": "Oilseed processing residue",
+    "Camellia oleifera shell": "Oilseed processing residue",
+    "Pistachio shell": "Fruit and nut processing residue",
+    "Coconut shell": "Fruit and nut processing residue",
+    "Coconut husk": "Fruit and nut processing residue",
+    "Hazelnut husk": "Fruit and nut processing residue",
+    "Acai seed": "Fruit and nut processing residue",
+    "Lemon waste": "Fruit and nut processing residue",
+    "Orange peel": "Fruit and nut processing residue",
+    "Orange bagasse": "Fruit and nut processing residue",
+    "Banana peel": "Fruit and nut processing residue",
+    "Plantain peel": "Fruit and nut processing residue",
+    "Cotton stalk": "Industrial/fiber crop residue",
+    "Tobacco straw": "Industrial/fiber crop residue",
+    "Pigeon pea stalk": "Legume crop residue",
+    "Oil palm bunch": "Oil-palm processing residue",
+    "Sugarcane bagasse": "Sugar-crop processing residue",
+    "Sugarcane filter cake": "Sugar-crop processing residue",
+    "Sugar beet pulp": "Sugar-crop processing residue",
+    "Licorice root pulp": "Agricultural/root processing residue",
+    "Cereal and grass seed residues": "Seed-processing residue",
+    "Vegetable waste": "Vegetable processing residue",
+    "Vegetable waste + thiourea": "Vegetable processing residue",
+    "Wheat straw + orange peel + rice husk": "Mixed postharvest agricultural residues",
+    "Maize straw + cow dung": "Mixed eligible and non-eligible feedstocks",
 }
 
-CATEGORY_ORDER = [
-    "Seed/husk/shell residues",
-    "Crop residue",
-    "Processing residue",
-    "Fruit waste",
-    "Vegetable residue",
-    "Mixed residues",
-]
+FEEDSTOCK_MARKERS = {
+    "Cereal field residue": "o",
+    "Cereal processing residue": "s",
+    "Fruit and nut processing residue": "^",
+    "Oilseed processing residue": "D",
+    "Sugar-crop processing residue": "P",
+    "Oil-palm processing residue": "v",
+    "Agricultural/root processing residue": "h",
+    "Vegetable processing residue": "X",
+    "Industrial/fiber crop residue": "*",
+    "Legume crop residue": "p",
+    "Seed-processing residue": "8",
+    "Mixed postharvest agricultural residues": "<",
+    "Mixed eligible and non-eligible feedstocks": "d",
+}
+
+FEEDSTOCK_COLORS = {
+    "Cereal field residue": "#1B7F4E",
+    "Cereal processing residue": "#55A868",
+    "Fruit and nut processing residue": "#C44E52",
+    "Oilseed processing residue": "#E07B39",
+    "Sugar-crop processing residue": "#4C72B0",
+    "Oil-palm processing residue": "#8172B3",
+    "Agricultural/root processing residue": "#937860",
+    "Vegetable processing residue": "#6A9A23",
+    "Industrial/fiber crop residue": "#CCB974",
+    "Legume crop residue": "#DA8BC3",
+    "Seed-processing residue": "#64B5CD",
+    "Mixed postharvest agricultural residues": "#8C8C8C",
+    "Mixed eligible and non-eligible feedstocks": "#6B3FA0",
+}
 
 
 def style() -> None:
@@ -141,14 +181,22 @@ def add_panel_tag(ax, tag: str, x: float = -0.02, y: float = 1.04) -> None:
     )
 
 
+def standard_category(specific: str, recorded: str = "") -> str:
+    recorded = str(recorded).strip()
+    if recorded and recorded != "NR":
+        return recorded
+    specific = str(specific).strip()
+    if specific in SPECIFIC_TO_CATEGORY:
+        return SPECIFIC_TO_CATEGORY[specific]
+    return "Mixed postharvest agricultural residues"
+
+
 def classified_pairs(df: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for _, rec in df.iterrows():
         specific = rec["specific_feedstock"].strip()
         display = SPECIFIC_DISPLAY.get(specific, specific)
-        category = SPECIFIC_TO_CATEGORY.get(specific)
-        if category is None:
-            category = "Mixed residues" if "+" in specific else "Crop residue"
+        category = standard_category(specific, rec.get("feedstock_category", ""))
         rows.append(
             {
                 "study_id": rec["study_id"],
@@ -232,13 +280,13 @@ def save_figure(fig, stem: Path) -> None:
 
 
 def plot_combined(cat: pd.DataFrame, spec: pd.DataFrame) -> None:
-    fig = plt.figure(figsize=(8.4, 13.0))
+    fig = plt.figure(figsize=(8.8, 15.2))
     gs = GridSpec(
         2,
         1,
-        height_ratios=[1.15, 3.55],
+        height_ratios=[2.15, 3.55],
         hspace=0.22,
-        left=0.32,
+        left=0.44,
         right=0.97,
         top=0.955,
         bottom=0.05,
@@ -268,8 +316,8 @@ def plot_combined(cat: pd.DataFrame, spec: pd.DataFrame) -> None:
 
 
 def plot_panel_a(cat: pd.DataFrame) -> None:
-    fig, ax = plt.subplots(figsize=(8.0, 3.8))
-    fig.subplots_adjust(left=0.32, right=0.97, top=0.86, bottom=0.16)
+    fig, ax = plt.subplots(figsize=(8.6, 6.4))
+    fig.subplots_adjust(left=0.44, right=0.97, top=0.88, bottom=0.12)
     n_cat = int(cat["n"].sum())
     draw_hbar(
         ax,

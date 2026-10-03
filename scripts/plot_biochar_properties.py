@@ -28,7 +28,7 @@ SCRIPTS = Path(__file__).resolve().parent
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from plot_feedstock_composition import CATEGORY_ORDER, SPECIFIC_TO_CATEGORY
+from plot_feedstock_composition import CATEGORY_ORDER, standard_category
 
 OUT_COMBINED = FIGDIR / "biochar_physicochemical_properties"
 OUT_A = FIGDIR / "biochar_physicochemical_A_ph"
@@ -101,9 +101,10 @@ def load_treatments() -> pd.DataFrame:
     out = pd.DataFrame(
         {
             "extraction_id": df["extraction_id"],
-            "feedstock_group": df["specific_feedstock"].map(
-                lambda name: SPECIFIC_TO_CATEGORY.get(name.strip(), "Mixed residues")
-            ),
+            "feedstock_group": [
+                standard_category(spec, cat)
+                for spec, cat in zip(df["specific_feedstock"], df["feedstock_category"])
+            ],
             "ph": pd.to_numeric(df["biochar_ph"], errors="coerce"),
             "ssa": pd.to_numeric(df["surface_area_m2_g"], errors="coerce"),
             "ash": pd.to_numeric(df["ash_content_pct"], errors="coerce"),
@@ -199,16 +200,16 @@ def save_figure(fig, stem: Path) -> None:
 
 
 def plot_combined(df: pd.DataFrame) -> None:
-    fig = plt.figure(figsize=(12.2, 8.4))
+    fig = plt.figure(figsize=(13.4, 12.2))
     gs = GridSpec(
         2,
         2,
-        wspace=0.24,
-        hspace=0.38,
-        left=0.26,
+        wspace=0.28,
+        hspace=0.32,
+        left=0.34,
         right=0.93,
-        top=0.91,
-        bottom=0.09,
+        top=0.93,
+        bottom=0.07,
         figure=fig,
     )
     axes = [fig.add_subplot(gs[i, j]) for i, j in ((0, 0), (0, 1), (1, 0), (1, 1))]
@@ -242,8 +243,8 @@ def plot_standalone(
     colors: dict[str, str],
     out: Path,
 ) -> None:
-    fig, ax = plt.subplots(figsize=(8.0, 4.5))
-    fig.subplots_adjust(left=0.34, right=0.90, top=0.86, bottom=0.16)
+    fig, ax = plt.subplots(figsize=(8.8, 7.2))
+    fig.subplots_adjust(left=0.42, right=0.90, top=0.90, bottom=0.12)
     draw_property_box(ax, df, column, xlabel, heading, xlim, colors, title=True)
     save_figure(fig, out)
 

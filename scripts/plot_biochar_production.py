@@ -29,7 +29,7 @@ SCRIPTS = Path(__file__).resolve().parent
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from plot_feedstock_composition import CATEGORY_ORDER, SPECIFIC_TO_CATEGORY
+from plot_feedstock_composition import CATEGORY_ORDER, standard_category
 
 OUT_COMBINED = FIGDIR / "biochar_production_conditions"
 OUT_A = FIGDIR / "biochar_production_A_temperature"
@@ -118,8 +118,8 @@ def hide_spines(ax) -> None:
     ax.set_axisbelow(True)
 
 
-def feedstock_category(specific: str) -> str:
-    return SPECIFIC_TO_CATEGORY.get(specific.strip(), "Mixed residues")
+def feedstock_category(specific: str, recorded: str = "") -> str:
+    return standard_category(specific, recorded)
 
 
 def classify_modification(row: pd.Series) -> str:
@@ -162,6 +162,7 @@ def load_treatments() -> pd.DataFrame:
         [
             "extraction_id",
             "specific_feedstock",
+            "feedstock_category",
             "modification_class",
             "co_amendment",
             "co_amendment_class",
@@ -181,7 +182,10 @@ def load_treatments() -> pd.DataFrame:
     out["ash"] = pd.to_numeric(out["ash_content_pct"], errors="coerce")
     cec = pd.to_numeric(out["cec_cmolc_kg"], errors="coerce")
     out["cec"] = cec.where(out["cec_reported_for"] == "biochar")
-    out["feedstock_group"] = out["specific_feedstock"].map(feedstock_category)
+    out["feedstock_group"] = [
+        feedstock_category(spec, cat)
+        for spec, cat in zip(out["specific_feedstock"], out["feedstock_category"])
+    ]
     out["mod_group"] = out.apply(classify_modification, axis=1)
     out["mod_series"] = np.where(
         out["mod_group"] == "Unmodified",
@@ -263,8 +267,9 @@ def draw_boxplot(ax, df: pd.DataFrame, title: bool = True) -> str:
         series.append(vals)
         labels.append(f"{cat} (n = {len(vals)})")
 
+    boxed = [vals if len(vals) else np.array([np.nan]) for vals in series]
     ax.boxplot(
-        series,
+        boxed,
         tick_labels=labels,
         vert=False,
         patch_artist=True,
@@ -410,18 +415,18 @@ def save_figure(fig, stem: Path, tight: bool = True) -> None:
 
 
 def plot_combined(df: pd.DataFrame, mods: pd.DataFrame) -> None:
-    fig = plt.figure(figsize=(12.6, 8.0))
+    fig = plt.figure(figsize=(13.2, 10.4))
     gs = GridSpec(
         2,
         2,
         width_ratios=[1.12, 1.08],
-        height_ratios=[0.92, 1.38],
-        wspace=0.32,
-        hspace=0.42,
-        left=0.17,
+        height_ratios=[0.78, 1.85],
+        wspace=0.34,
+        hspace=0.38,
+        left=0.28,
         right=0.985,
-        top=0.91,
-        bottom=0.10,
+        top=0.92,
+        bottom=0.08,
         figure=fig,
     )
     ax_a = fig.add_subplot(gs[0, 0])
@@ -485,8 +490,8 @@ def plot_panel_a(df: pd.DataFrame) -> None:
 
 
 def plot_panel_b(df: pd.DataFrame) -> None:
-    fig, ax = plt.subplots(figsize=(8.0, 4.4))
-    fig.subplots_adjust(left=0.38, right=0.97, top=0.88, bottom=0.16)
+    fig, ax = plt.subplots(figsize=(8.6, 7.2))
+    fig.subplots_adjust(left=0.46, right=0.97, top=0.90, bottom=0.12)
     draw_boxplot(ax, df, title=True)
     save_figure(fig, OUT_B)
 

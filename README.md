@@ -54,7 +54,7 @@ NELSON/
 python scripts/build_analysis_set.py
 ```
 
-This writes `ANALYSIS SET.csv` and `ANALYSIS SET codebook.csv`. Headers are cleaned, missing values are coded as `NR`, synonyms are harmonized, and numeric companion columns are parsed (temperature, pH, application rate, durations in days, and others). See the codebook for definitions.
+This writes `ANALYSIS SET.csv` and `ANALYSIS SET codebook.csv`. Headers are cleaned, missing values are coded as `NR`, specific-feedstock synonyms are harmonized, and numeric companion columns are parsed (temperature, pH, application rate, durations in days, and others). Feedstock classes are kept as the standard names recorded in the extraction file. See the codebook for definitions.
 
 ## Figures
 
@@ -102,15 +102,15 @@ The PTE chart counts a study once for each metal it investigated, so the bars do
 
 The vegetable chart counts unique study-species combinations, not treatment rows. `Others` includes coriander, rapeseed, cabbage, crown daisy, and remaining crops not in the named list.
 
-The feedstock figure uses unique study-category combinations in Panel A and unique study-specific feedstock combinations in Panel B. Maize stover and maize stalk are combined as corn stalk/stover.
+The feedstock figure uses unique study-category combinations in Panel A and unique study-specific feedstock combinations in Panel B. Categories are the standard classes recorded in the analysis set. Maize stover and maize stalk are combined as corn stalk/stover in Panel B only.
 
-The production-conditions figure is extraction-level (one `extraction_id` per treatment). Panels A and B use the 91 treatments with a numeric pyrolysis temperature. Nine treatments had no usable temperature (seven not reported, two reported only as <500 C). Panel B uses the same hierarchical feedstock groups as the feedstock figure. Panel C assigns one modification class per treatment: the biochar modification is used when present, otherwise the co-amendment (compost, microbial inoculant, or mineral). Panel D compares unmodified and modified/co-amended treatments using group medians for temperature, residence time, pH, surface area, ash, and biochar CEC. Each axis is scaled to the larger of the two group medians.
+The production-conditions figure is extraction-level (one `extraction_id` per treatment). Panels A and B use the 91 treatments with a numeric pyrolysis temperature. Nine treatments had no usable temperature (seven not reported, two reported only as <500 C). Panel B uses the same standard feedstock classes as the feedstock figure. Panel C assigns one modification class per treatment: the biochar modification is used when present, otherwise the co-amendment (compost, microbial inoculant, or mineral). Panel D compares unmodified and modified/co-amended treatments using group medians for temperature, residence time, pH, surface area, ash, and biochar CEC. Each axis is scaled to the larger of the two group medians.
 
-The physicochemical figure is also extraction-level. It uses the same hierarchical feedstock groups. CEC is restricted to values reported for the biochar, not the soil. Sample size varies by property because not every treatment reported pH, surface area, ash, or CEC.
+The physicochemical figure is also extraction-level. It uses the same standard feedstock classes. CEC is restricted to values reported for the biochar, not the soil. Sample size varies by property because not every treatment reported pH, surface area, ash, or CEC.
 
 The bioavailability Cleveland plot uses extraction x PTE points with a parsed numeric percentage. Positive values are reductions in soil bioavailability. Increases are plotted as negative values. Ranges are entered as the midpoint. When several methods or harvests are reported for the same metal, the preferred available/DTPA/CaCl2/exchangeable value is kept, otherwise the median is used. Treatments without a usable percentage are omitted.
 
-The plant-metal Cleveland plot uses the same extraction-level layout and styling. Panels are target PTEs. Point shape and color are the hierarchical feedstock group. Values come from `change_in_plant_metal_uptake`. Edible, shoot, leaf, and fruit percentages are preferred over root or stem. Several cultivars, seasons, or harvests for the same metal are entered as the median. Qualitative records, translocation-only values, and unnamed total-metal ranges are omitted.
+The plant-metal Cleveland plot uses the same extraction-level layout and styling. Panels are target PTEs. Point shape and color are the standard feedstock class. Values come from `change_in_plant_metal_uptake`. Edible, shoot, leaf, and fruit percentages are preferred over root or stem. Several cultivars, seasons, or harvests for the same metal are entered as the median. Qualitative records, translocation-only values, and unnamed total-metal ranges are omitted.
 
 ## Requirements
 
